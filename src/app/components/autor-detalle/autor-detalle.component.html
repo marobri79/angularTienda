@@ -1,0 +1,23 @@
+<div *ngIf="autor">
+    
+    <form class="form-horizontal">
+        <label *ngIf="esDetalleAutor">ID: {{ autor.id }}</label>
+        <br>
+        <!--<label>Libro con id lo que sea</label>-->
+
+        <label for="nombre">Nombre:</label><br>
+        <input [(ngModel)]="autor.nombre" type="text" name="nombre"><br>
+        <br>
+        <label for="apellidos">Apellidos:&nbsp;</label><br>
+        <input [(ngModel)]="autor.apellidos" type="text" name="autor">
+        
+        <br><br>
+        
+        <button type="submit" (click)="guardarAutor()" *ngIf="mostrarBotonSubmit">
+            {{ textoBotonSubmit }}
+        </button>
+        
+    </form>
+</div>
+
+    

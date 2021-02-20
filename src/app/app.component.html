@@ -1,0 +1,79 @@
+<div id="main-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="/">{{textoPrincipal}}</a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <ng-container *ngIf="puedoMostrarSeccionUsuarios">
+          <li class="nav-item" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/usuarios']" class="nav-link">Usuarios</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="puedoMostrarSeccionLibros">
+            <li class="nav-item" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/libros']" class="nav-link">Libros</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="puedoMostrarSeccionAutores">
+            <li class="nav-item" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/autores']" class="nav-link" href="#">Autores</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="puedoMostrarSeccionEditoriales">
+          <li class="nav-item" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/editoriales']" class="nav-link" href="#">Editoriales</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="puedoMostrarSeccionPedidos">
+          <li class="nav-item" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['/pedidos']" class="nav-link" href="#">Pedidos</a>
+          </li>
+        </ng-container>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <ng-container *ngIf="!estoyLogado">
+          <li><a [routerLink]="['/registro']" class="btn btn-primary mr-2"
+              role="button">Registrate</a>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="!estoyLogado">
+          <li><a [routerLink]="['/login']" class="btn btn-info" role="button">Login</a></li>
+        </ng-container>
+        <ng-container *ngIf="estoyLogado">
+          <li id="contenedorLiCarrito">
+            <!--
+              <a  [routerLink]="['/carrito']" class="btn btn-warning mr-2" role="button">{{ carrito?.lineasCarrito.length || 0 }}</a>
+            -->
+            <a [routerLink]="['/carrito']" style="text-decoration:none;">
+              <img class="mr-2" style="height:38px;cursor:pointer;"
+                src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjUxMHB4IiBoZWlnaHQ9IjUxMHB4IiB2aWV3Qm94PSIwIDAgNTEwIDUxMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEwIDUxMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9InNob3BwaW5nLWNhcnQiPg0KCQk8cGF0aCBkPSJNMTUzLDQwOGMtMjguMDUsMC01MSwyMi45NS01MSw1MXMyMi45NSw1MSw1MSw1MXM1MS0yMi45NSw1MS01MVMxODEuMDUsNDA4LDE1Myw0MDh6IE0wLDB2NTFoNTFsOTEuOCwxOTMuOEwxMDcuMSwzMDYNCgkJCWMtMi41NSw3LjY1LTUuMSwxNy44NS01LjEsMjUuNWMwLDI4LjA1LDIyLjk1LDUxLDUxLDUxaDMwNnYtNTFIMTYzLjJjLTIuNTUsMC01LjEtMi41NS01LjEtNS4xdi0yLjU1MWwyMi45NS00My4zNWgxODguNw0KCQkJYzIwLjQsMCwzNS43LTEwLjIsNDMuMzUtMjUuNUw1MDQuOSw4OS4yNWM1LjEtNS4xLDUuMS03LjY1LDUuMS0xMi43NWMwLTE1LjMtMTAuMi0yNS41LTI1LjUtMjUuNUgxMDcuMUw4NC4xNSwwSDB6IE00MDgsNDA4DQoJCQljLTI4LjA1LDAtNTEsMjIuOTUtNTEsNTFzMjIuOTUsNTEsNTEsNTFzNTEtMjIuOTUsNTEtNTFTNDM2LjA1LDQwOCw0MDgsNDA4eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" />
+              <div class="carrito-numero">{{ carrito?.lineasCarrito.length || 0 }}</div>
+            </a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="estoyLogado">
+          <li><a (click)="logout()"><img class="mr-2" style="height:38px;cursor:pointer;"
+            src="data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTQsMTJhMSwxLDAsMCwwLDEsMWg3LjU5bC0yLjMsMi4yOWExLDEsMCwwLDAsMCwxLjQyLDEsMSwwLDAsMCwxLjQyLDBsNC00YTEsMSwwLDAsMCwuMjEtLjMzLDEsMSwwLDAsMCwwLS43NiwxLDEsMCwwLDAtLjIxLS4zM2wtNC00YTEsMSwwLDEsMC0xLjQyLDEuNDJMMTIuNTksMTFINUExLDEsMCwwLDAsNCwxMlpNMTcsMkg3QTMsMywwLDAsMCw0LDVWOEExLDEsMCwwLDAsNiw4VjVBMSwxLDAsMCwxLDcsNEgxN2ExLDEsMCwwLDEsMSwxVjE5YTEsMSwwLDAsMS0xLDFIN2ExLDEsMCwwLDEtMS0xVjE2YTEsMSwwLDAsMC0yLDB2M2EzLDMsMCwwLDAsMywzSDE3YTMsMywwLDAsMCwzLTNWNUEzLDMsMCwwLDAsMTcsMloiLz48L3N2Zz4=" /></a></li>
+        </ng-container>
+        <ng-container *ngIf="estoyLogado">
+          <li><a [routerLink]="['/usuarios', getIdUsuarioConectado()]" class="btn btn-dark" role="button">Editar Mi Perfil</a></li>
+        </ng-container>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid" id="main-content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer style= "text-align:center;">Contacte con nosotros en el teléfono: 698.971.235</footer>
+</div>

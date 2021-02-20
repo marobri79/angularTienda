@@ -1,0 +1,3 @@
+// Borrado logico o fisico de libros?
+
+// Cuando borras un autor, debes comprobar no tenga libros para poder borrarlo

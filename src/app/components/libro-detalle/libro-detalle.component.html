@@ -1,0 +1,38 @@
+<div *ngIf="libro">
+    
+    <form>
+        <label *ngIf="esDetalleLibro">ID: {{ libro.id }}</label>
+        <br>
+        <img *ngIf="esDetalleLibro" [src]="getUrlPhoto()" alt="Error en la imagen">
+        <br>
+        <br>
+        <input name="ficheroImagen" type="file" (change)="handleFileInput($event.target.files)">
+        <br>
+        <label for="titulo">Titulo:</label>
+        <br>
+        <input [(ngModel)]="libro.titulo" type="text" name="titulo">
+        <br>        
+        <label for="autor:">Autor:</label><br>
+        <select [(ngModel)]="libro.autor" [compareWith]="byAutor" name="autor">
+            <option *ngFor="let autor of autores" [ngValue]="autor">
+                ID: {{ autor.id }} - {{ autor.nombre }} {{ autor.apellidos }}
+            </option>
+        </select>
+        <br>
+        <label for="editorial">Editorial:</label><br>
+        <select [(ngModel)]="libro.editorial" [compareWith]="byEditorial" name="editorial">
+            <option *ngFor="let editorial of editoriales" [ngValue]="editorial">
+                {{ editorial.nombre }}
+            </option>
+        </select>
+        <br>
+        <br>
+        <label for="precio">Precio:</label><br>
+        <input [(ngModel)]="libro.precio" type="number" name="precio">
+        <br>  
+        <br>
+        <button type="submit" (click)="guardarLibro()" *ngIf="mostrarBotonSubmit">
+            {{ textoBotonSubmit }}
+        </button>
+    </form>
+</div>

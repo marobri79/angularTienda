@@ -1,0 +1,47 @@
+<div *ngIf="pedido">
+    <label>Pedido ID: {{ pedido["id"] }}</label>
+    <br>
+    <label>Usuario: {{ pedido["usuario"]["nombre"] }}</label>
+    <br>
+    <label>Fecha: {{ pedido["fecha"] }}</label>
+    <br>
+    <label>Enviado: {{ pedido["enviado"] }}</label>
+    <br>
+    <label>Total: {{ pedido["precioTotal"] }}</label>
+    <br>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Libro</th>
+                <th>Autor</th>
+                <th>Editorial</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let linea of pedido.lineas">
+                <td>
+                    {{ linea["libro"]["titulo"] }}
+                </td>
+                <td>
+                    {{ linea["libro"]["autor"]["nombre"] }} {{ linea["libro"]["autor"]["apellidos"] }}
+                </td>
+                <td>
+                    {{ linea["libro"]["editorial"]["nombre"] }}
+                </td>
+                <td>
+                    {{ linea["precio"] }}
+                </td>
+                <td>
+                    {{ linea["cantidad"] }}
+                </td>
+                <td>{{ linea["precio"] * linea["cantidad"] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+
+</div>

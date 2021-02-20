@@ -1,0 +1,132 @@
+<div class="row">
+        <div class="card card-container border-dark">
+            <div class="card-header text-center">REGISTRO</div>
+            <div class="card-text p-3">
+                <form
+                (ngSubmit)="onSubmit()"
+                #registroForm="ngForm"
+                >
+                    <div class="form-group">
+                        <label for="nombre">Nombre de usuario</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="nombre"
+                        [(ngModel)]="usuario.nombre"
+                        required
+                        #nombre="ngModel"
+                        />
+
+                        <div
+                        class="alert alert-danger text-center mt-2"
+                        role="alert"
+                        *ngIf="submitted && nombre.invalid"
+                        >
+                        Nombre de usuario es obligatorio!
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="email">Direccion de email</label>
+                        <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        [(ngModel)]="usuario.email"
+                        required
+                        #email="ngModel"
+                        />
+                        
+                        <div
+                        class="alert alert-danger text-center mt-2"
+                        role="alert"
+                        *ngIf="submitted && email.invalid"
+                        >
+                        Email es obligatorio
+                        </div>
+                    
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clave">Contraseña</label>
+                        <input
+                        type="password"
+                        class="form-control"
+                        name="clave"
+                        [(ngModel)]="usuario.clave"
+                        required
+                        minlength="4"
+                        #clave="ngModel"
+                        />
+                        
+                        <div
+                        class="alert alert-danger text-center mt-2"
+                        role="alert"
+                        *ngIf="submitted && clave.invalid"
+                        >
+                            <div *ngIf="clave.errors.required">Contraseña es obligatoria!</div>
+                            <div *ngIf="clave.errors.minlength">Contraseña debe tener una longitud minima de cuatro caracteres</div>
+                        </div>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="direccion">Direccion</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="direccion"
+                        [(ngModel)]="usuario.direccion"
+                        required
+                        #direccion="ngModel"
+                        />
+                    
+                        <div
+                        class="alert alert-danger text-center mt-2"
+                        role="alert"
+                        *ngIf="submitted && direccion.invalid"
+                        >
+                        Direccion es obligatorio!
+                        </div>
+        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Telefono</label>
+                        <input
+                        type="tel"
+                        class="form-control"
+                        name="telefono"
+                        [(ngModel)]="usuario.telefono"
+                        required
+                        #telefono="ngModel"
+                        />
+                    
+                        <div
+                        class="alert alert-danger text-center mt-2"
+                        role="alert"
+                        *ngIf="submitted && telefono.invalid"
+                        >
+                        Telefono es obligatorio!
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">
+                        Registrarse
+                        </button>
+                    </div>
+        
+                    <div class="form-group">
+                        <div
+                        class="alert alert-danger text-center"
+                        role="alert"
+                        *ngIf="submitted && registroFallido"
+                        >
+                        Registro fallido: {{ mensajeError }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

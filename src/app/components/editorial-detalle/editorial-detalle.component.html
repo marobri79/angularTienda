@@ -1,0 +1,21 @@
+<div *ngIf="editorial">
+    
+    <form>
+        <label *ngIf="esDetalleEditorial">ID: {{ editorial.id }}</label>
+        <br>
+        <!--<label>Libro con id lo que sea</label>-->
+
+        <label for="editorial">Nombre :</label><br>
+        <input [(ngModel)]="editorial.nombre" type="text" name="autor"><br>
+
+        <label for="autor">Pais :</label><br>
+        <input [(ngModel)]="editorial.pais" type="text" name="autor">
+        
+        <br><br>
+        
+        <button type="submit" (click)="guardarEditorial()" *ngIf="mostrarBotonSubmit">
+            {{ textoBotonSubmit }}
+        </button>
+        
+    </form>
+</div>

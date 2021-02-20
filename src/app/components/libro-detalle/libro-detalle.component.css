@@ -1,0 +1,9 @@
+.btn-borrar {
+    background-color: black;
+    color:white;
+    cursor: pointer;
+}
+img{
+    width: 75px;
+    height: 100px;
+}

@@ -1,0 +1,43 @@
+
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Enviado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pedido of pedidos">
+            <td>
+               <button> <a [routerLink]="['/pedidos', pedido['id']]">
+                   Ver detalle
+                </a></button>
+            </td>
+            <td>
+                {{ formatDate(pedido["fecha"]) }}
+            </td>
+            <td>
+                {{ pedido["precioTotal"] }}
+            </td>
+            <td>
+                <div *ngIf="pedido['enviado']; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>
+                    Si
+                </ng-template>
+                <ng-template #elseBlock>
+                    <div *ngIf="puedeEnviarPedido; then thenBlockPuedeEnviar else elseBlockNoPuedeEnviar"></div>
+                    <ng-template #thenBlockPuedeEnviar>
+                        <button (click)="enviarPedido(pedido['id'])">
+                            Enviar Pedido
+                        </button>
+                    </ng-template>
+                    <ng-template #elseBlockNoPuedeEnviar>
+                        No
+                    </ng-template>
+                </ng-template>
+            </td>
+        </tr>
+    </tbody>
+</table>
